@@ -7,7 +7,6 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from '@react-three/fiber'
 
 export default function Model(props) {
-  const group = useRef();
   const { nodes, materials } = useGLTF("../../tarkovMilk.glb");
     const myMesh = React.useRef();
   

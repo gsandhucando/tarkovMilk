@@ -31,14 +31,16 @@ function App() {
           start: 'top top',
           endTrigger: '.section-five',
           end: 'bottom bottom',
-          scrub: 1
+          scrub: 1,
+          markers: true
         }
       })
-      .to(ref.current.rotation, { y: 4.79 })
-      .to(camera.position, { x: -0.1 })
-      .to(ref.current.rotation, { z: 1.6 })
-      .to(ref.current.rotation, { z: 0.02, y: 3.1 }, 'simultaneously')
-      .to(camera.position, { x: 0.16 }, 'simultaneously')
+      .to(ref.current.children[0].rotation, {x: 6.5}, 'simultaneously')
+      // .to(ref.current.rotation, { y: 4.79 })
+      .to(camera.position, { y: 5 }, 'simultaneously')
+      // .to(ref.current.rotation, { z: 1.6 })
+      // .to(ref.current.rotation, { z: 0.02, y: 3.1 }, 'simultaneously')
+      // .to(camera.position, { x: 0.16 }, 'simultaneously')
         // .to(ref.current.rotation, { y: -1 })
         // .to(camera.position, { x: 14, y: 0 }, 'simultaneously')
 
@@ -48,6 +50,7 @@ function App() {
 
         // .to(ref.current.rotation, { y: .5 }, 'simultaneously')
         // .to(camera.position, { x: -2, z: -1 })
+        console.log(ref)
 
     }, [])
     return <group ref={ref}>{children}</group>
@@ -70,20 +73,22 @@ function App() {
         </a>
       </header> */}
         <div className='secondSection' style={{ position: 'relative' }}>
-        <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }}>
+        <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }}  camera={{ fov: 75, position: [0, 0, 10] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
           <fog attach="fog" args={['purple', 1, 155]} />
           <Suspense fallback={<Loader />}>
             <AnimationWrapper>
-              <Model position={[0,0,-45]} />
+              <Model position={[0,-5,-35]} />
             </AnimationWrapper>
             {/* <spotLight intensity={.3} position={[0, 0, 30]} angle={0.15} penumbra={1} decay={2} castShadow />
             <spotLight intensity={.3} position={[0, 0, 30]} angle={0.45} penumbra={1} decay={2} castShadow />
             <spotLight intensity={.3} position={[0, 0, 30]} angle={0.5} penumbra={1} decay={2} castShadow /> */}
-            {/* <OrbitControls /> */}
-            <Environment preset="sunset" background />
+            {/* <Environment preset="city" background /> */}
+            <pointLight position={[10, 10, 10]} />
           </Suspense>
         </Canvas>
-        <section className="section-one" />
+        <section className="section-one">
+          <h1 className='title'>MONOKO</h1>
+        </section>
       <section className="section-two" />
       <section className="section-three" />
       <section className="section-four" />

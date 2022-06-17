@@ -12,3 +12,27 @@ section {
   height: 100vh;
   position: relative;
 }
+.section-one {
+  background-color: tomato;
+}
+
+.section-two {
+  background-color: steelblue;
+}
+
+.section-three {
+  background-color: crimson;
+}
+
+.section-four {
+  background-color: lime;
+}
+
+.section-five {
+  background-color: grey;
+}
+
+.title{
+  position: absolute;
+  z-index: 99;
+}
