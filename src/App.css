@@ -60,6 +60,9 @@ section {
   flex-direction: column;
   align-items: center;
   background-color: steelblue;
+  background-image: url("../public/ad30.png");
+  background-repeat: repeat;
+  /* background-size: cover; */
 }
 
 .section-three {

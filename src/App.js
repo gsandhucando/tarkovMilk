@@ -39,7 +39,7 @@ function App() {
       })
       .to(ref.current.children[0].rotation, {x: 6.25}, 'simultaneously')
       // .to(ref.current.rotation, { y: 4.79 })
-      // .to(camera.position, { y: 5 }, 'simultaneously')
+      // .to(camera.position, { x: 15 }, 'simultaneously')
       // .to(ref.current.rotation, { z: 1.6 })
       // .to(ref.current.rotation, { z: 0.02, y: 3.1 }, 'simultaneously')
       // .to(camera.position, { x: 0.16 }, 'simultaneously')
@@ -95,8 +95,8 @@ function App() {
           <p className='description'>Rated Number #1 In Russia</p>
         </section>
       <section className="section-two" >
-      <h1 className='title'>Special offer</h1>
-          <p className='description'>Buy One Get One Free</p>
+      <h1 className='title' style={{color: '#de2831'}}>Special offer</h1>
+          <p className='description' style={{color: 'gold', fontFamily: "RedOctober"}}>Buy One Get One Free</p>
       <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 49}} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
           {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
           <Suspense fallback={<Loader />}>
