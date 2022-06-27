@@ -28,6 +28,41 @@ body {
   font-style: bold;
 }
 
+.nav{
+  display: flex;
+  height: 100px;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /* background: white; */
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: 10px; */
+}
+.logo{
+  height: 70px;
+  margin: 55px;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+.logo:hover { transform: scale(1.1); }
+.navRightContainer{
+  margin-right: 20px;
+}
+.navUl{
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+    width: 250px;
+}
+.navLi{
+  /* margin: 0 20px; */
+  cursor: pointer;
+}
 section {
   width: 100%;
   height: 100vh;
@@ -40,6 +75,8 @@ section {
   /* justify-content: center; */
   align-items: center;
   /* text-shadow: 0px 0px 6px #000000; */
+  /* background-image: url("../public/monokoCat.jpg");
+  background-repeat: repeat; */
 }
 .title{
   /* position: absolute; */

@@ -74,6 +74,15 @@ function App() {
           Learn React
         </a>
       </header> */}
+      <div className='nav'>
+        <img className='logo' src='logo.png' />
+        <div className='navRightContainer'>
+          <ul className='navUl'>
+            <li className='navLi'>CONTACT</li>
+            <li className='navLi' style={{marginLeft: 10}}>ABOUT</li>
+          </ul>
+        </div>
+      </div>
         <div className='secondSection' style={{ position: 'relative' }}>
         {/* orthographic zoom: 20,  */}
         <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
