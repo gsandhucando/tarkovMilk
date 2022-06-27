@@ -7,6 +7,27 @@ body {
   overflow-x: hidden;
 }
 
+@font-face {
+  font-family: 'RedOctober-Light';
+  src: local('RedOctober'),
+  url('../public/fonts/RedOctober-Light.ttf') format("truetype");
+  font-weight: lighter;
+  /* font-style: normal; */
+  }
+@font-face {
+  font-family: 'RedOctober';
+  src: local('RedOctober'),
+  url('../public/fonts/RedOctober.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  }
+@font-face {
+  font-family: "RedOctober-Fat";
+  src: url("../public/fonts/RedOctober-Fat.ttf");
+  font-weight: bold;
+  font-style: bold;
+}
+
 section {
   width: 100%;
   height: 100vh;
@@ -14,6 +35,21 @@ section {
 }
 .section-one {
   background-color: tomato;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.title{
+  /* position: absolute; */
+  z-index: 99;
+  font-family: "RedOctober-Fat";
+  font-size: 5.4rem;
+  margin: 0;
+}
+.description{
+  font-family: "RedOctober-Light";
+  font-size: 1.4rem;
 }
 
 .section-two {
@@ -32,7 +68,3 @@ section {
   background-color: grey;
 }
 
-.title{
-  position: absolute;
-  z-index: 99;
-}

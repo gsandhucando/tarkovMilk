@@ -4,7 +4,9 @@ import { useGLTF, Html, useProgress, PerspectiveCamera, OrbitControls, useHelper
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { gsap, Power3 } from 'gsap'
 import Model from './TarkovMilk'
+import GoldStar from './GoldStar'
 import './App.css';
+// import './fonts/RedOctober.ttf';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -35,9 +37,9 @@ function App() {
           markers: true
         }
       })
-      .to(ref.current.children[0].rotation, {x: 6.5}, 'simultaneously')
+      .to(ref.current.children[0].rotation, {x: 6.3}, 'simultaneously')
       // .to(ref.current.rotation, { y: 4.79 })
-      .to(camera.position, { y: 5 }, 'simultaneously')
+      // .to(camera.position, { y: 5 }, 'simultaneously')
       // .to(ref.current.rotation, { z: 1.6 })
       // .to(ref.current.rotation, { z: 0.02, y: 3.1 }, 'simultaneously')
       // .to(camera.position, { x: 0.16 }, 'simultaneously')
@@ -73,11 +75,13 @@ function App() {
         </a>
       </header> */}
         <div className='secondSection' style={{ position: 'relative' }}>
-        <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }}  camera={{ fov: 75, position: [0, 0, 10] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
-          <fog attach="fog" args={['purple', 1, 155]} />
+        {/* orthographic zoom: 20,  */}
+        <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
+          {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
           <Suspense fallback={<Loader />}>
             <AnimationWrapper>
-              <Model position={[0,-5,-35]} />
+              <Model position={[0,-15,-35]} />
+              {/* <GoldStar position={[0,0,-30]} rotation={[-30, 0 , 0]}/> */}
             </AnimationWrapper>
             {/* <spotLight intensity={.3} position={[0, 0, 30]} angle={0.15} penumbra={1} decay={2} castShadow />
             <spotLight intensity={.3} position={[0, 0, 30]} angle={0.45} penumbra={1} decay={2} castShadow />
@@ -88,8 +92,26 @@ function App() {
         </Canvas>
         <section className="section-one">
           <h1 className='title'>MONOKO</h1>
+          <p className='description'>Rated Number #1 In Russia</p>
         </section>
-      <section className="section-two" />
+      <section className="section-two" >
+      <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 49}} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
+          {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
+          <Suspense fallback={<Loader />}>
+            {/* <AnimationWrapper> */}
+              {/* <Model position={[0,-15,-35]} /> */}
+              <GoldStar position={[0,0,-30]} rotation={[-10, 9.4 , 0]}/>
+              <GoldStar position={[20,0,-30]} rotation={[-30, 9 , 0]}/>
+              <GoldStar position={[-15,10,-30]} rotation={[-30.5, 4 , 0]}/>
+            {/* </AnimationWrapper> */}
+            {/* <spotLight intensity={.3} position={[0, 0, 30]} angle={0.15} penumbra={1} decay={2} castShadow />
+            <spotLight intensity={.3} position={[0, 0, 30]} angle={0.45} penumbra={1} decay={2} castShadow />
+            <spotLight intensity={.3} position={[0, 0, 30]} angle={0.5} penumbra={1} decay={2} castShadow /> */}
+            {/* <Environment preset="city" background /> */}
+            <pointLight position={[10, 10, 10]} />
+          </Suspense>
+        </Canvas>
+      </section>
       <section className="section-three" />
       <section className="section-four" />
       <section className="section-five" />
