@@ -100,8 +100,10 @@ function App() {
           </Suspense>
         </Canvas>
         <section className="section-one">
+          <div className='sectionOneTextContainer'>
           <h1 className='title'>MONOKO</h1>
           <p className='description'>Rated Number #1 In Russia</p>
+          </div>
         </section>
       <section className="section-two" >
       <h1 className='title' style={{color: 'gold'}}>Special offer</h1>
