@@ -37,7 +37,7 @@ function App() {
           markers: true
         }
       })
-      .to(ref.current.children[0].rotation, {x: 6.3}, 'simultaneously')
+      .to(ref.current.children[0].rotation, {x: 6.25}, 'simultaneously')
       // .to(ref.current.rotation, { y: 4.79 })
       // .to(camera.position, { y: 5 }, 'simultaneously')
       // .to(ref.current.rotation, { z: 1.6 })
@@ -95,14 +95,17 @@ function App() {
           <p className='description'>Rated Number #1 In Russia</p>
         </section>
       <section className="section-two" >
+      <h1 className='title'>Special offer</h1>
+          <p className='description'>Buy One Get One Free</p>
       <Canvas className='model'style={{ width: '100vw', height: '100vh', zIndex: 49}} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
           {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
           <Suspense fallback={<Loader />}>
             {/* <AnimationWrapper> */}
               {/* <Model position={[0,-15,-35]} /> */}
-              <GoldStar position={[0,0,-30]} rotation={[-10, 9.4 , 0]}/>
-              <GoldStar position={[20,0,-30]} rotation={[-30, 9 , 0]}/>
+              
               <GoldStar position={[-15,10,-30]} rotation={[-30.5, 4 , 0]}/>
+              <GoldStar position={[20,0,-30]} rotation={[-10, 9.4 , 0]}/>
+              <GoldStar position={[0,0,-30]} rotation={[-30, 9 , 0]}/>
             {/* </AnimationWrapper> */}
             {/* <spotLight intensity={.3} position={[0, 0, 30]} angle={0.15} penumbra={1} decay={2} castShadow />
             <spotLight intensity={.3} position={[0, 0, 30]} angle={0.45} penumbra={1} decay={2} castShadow />
@@ -111,9 +114,15 @@ function App() {
             <pointLight position={[10, 10, 10]} />
           </Suspense>
         </Canvas>
+
       </section>
-      <section className="section-three" />
-      <section className="section-four" />
+      <section className="section-three"> 
+      <h1 className='title'>Customer Reviews</h1>
+          <p className='description'>Buy One Get One Free</p>
+      </section>
+      <section className="section-four">
+        <div className='box' />
+      </section>
       <section className="section-five" />
       </div>
     </div>

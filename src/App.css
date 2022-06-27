@@ -42,17 +42,23 @@ section {
 }
 .title{
   /* position: absolute; */
-  z-index: 99;
+  /* z-index: 99; */
   font-family: "RedOctober-Fat";
   font-size: 5.4rem;
   margin: 0;
+  color: white;
 }
 .description{
+  /* z-index: 99; */
   font-family: "RedOctober-Light";
   font-size: 1.4rem;
+  color: white;
 }
 
 .section-two {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: steelblue;
 }
 
@@ -68,3 +74,8 @@ section {
   background-color: grey;
 }
 
+.box{
+  height: 400px;
+  width: 800px;
+  background: white;
+}
