@@ -34,7 +34,7 @@ function App() {
             endTrigger: '.section-five',
             end: 'bottom bottom',
             scrub: 1,
-            markers: true
+            // markers: true
           }
         })
         .to(ref.current.children[0].rotation, { x: 6.25 }, 'simultaneously')
@@ -54,19 +54,37 @@ function App() {
       // .to(camera.position, { x: -2, z: -1 })
       console.log(ref)
 
-      const tl = gsap .timeline({
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.section-two',
           start: 'bottom center',
           endTrigger: '.section-tree',
           end: 'center bottom',
           scrub: 1,
-          markers: true,
-          toggleAttribute: "restart pause resume none"
+          // markers: true,
+          toggleAttribute: "restart pause resume none",
+          id: 'tweets'
         }
       });
-            tl.from(".tweetContainer", {opacity: 0});
-            tl.to(".tweetContainer", {opacity: 1});
+      tl.from(".tweetContainer", { opacity: 0 });
+      tl.to(".tweetContainer", { opacity: 1 });
+      const tl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.section-five',
+          // start: 'top top',
+          start: '180px 90%',
+          // endTrigger: '.section-five',
+          end: 'center center',
+          // end: '90%',
+          scrub: 1,
+          markers: true,
+          id: 'bottom'
+          // toggleAttribute: "restart pause resume none"
+        }
+      });
+      tl2.from(".pixelFooterContainer", { xPercent: -100 });
+      tl2.to(".pixelFooterContainer", { xPercent: 0 });
+      tl2.to(".pixelFooterContainer", { xPercent: -150 });
 
     }, [])
     return <group ref={ref}>{children}</group>
@@ -184,9 +202,15 @@ function App() {
           </div>
         </section>
         <section className="section-four">
-          <div className='box' />
+          {/* <div className='box' /> */}
         </section>
-        <section className="section-five" />
+        <section className="section-five" >
+          <div className='pixelFooterContainer'>
+            <img className='pixel' src='./nikitaPix.png' alt='pixel image' />
+            <img className='cloud' src='./cloud.png' alt='cloud' />
+
+          </div>
+        </section>
       </div>
     </div>
   );
