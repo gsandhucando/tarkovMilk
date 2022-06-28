@@ -1,12 +1,11 @@
 import * as THREE from 'three';
-import React, { Suspense, useRef, useState, useEffect, useMemo, useLayoutEffect } from "react"
-import { useGLTF, Html, useProgress, PerspectiveCamera, OrbitControls, useHelper, Environment } from "@react-three/drei"
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import React, { Suspense, useRef, useLayoutEffect } from "react"
+import { Html, useProgress, } from "@react-three/drei"
+import { Canvas, useThree } from '@react-three/fiber'
 import { gsap, Power3 } from 'gsap'
 import Model from './TarkovMilk'
 import GoldStar from './GoldStar'
 import './App.css';
-// import './fonts/RedOctober.ttf';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -20,6 +19,7 @@ function Loader() {
 
 
 function App() {
+
   function AnimationWrapper({ children }) {
     const ref = useRef()
     const { camera } = useThree()
@@ -39,7 +39,7 @@ function App() {
         })
         .to(ref.current.children[0].rotation, { x: 6.25 }, 'simultaneously')
       // .to(ref.current.rotation, { y: 4.79 })
-      // .to(camera.position, { x: 15 }, 'simultaneously')
+      .to(camera.position, { z: 1500 })
       // .to(ref.current.rotation, { z: 1.6 })
       // .to(ref.current.rotation, { z: 0.02, y: 3.1 }, 'simultaneously')
       // .to(camera.position, { x: 0.16 }, 'simultaneously')
@@ -58,7 +58,7 @@ function App() {
         scrollTrigger: {
           trigger: '.section-two',
           start: 'bottom center',
-          endTrigger: '.section-tree',
+          endTrigger: '.section-three',
           end: 'center bottom',
           scrub: 1,
           // markers: true,
@@ -77,7 +77,7 @@ function App() {
           end: 'center center',
           // end: '90%',
           scrub: 1,
-          markers: true,
+          // markers: true,
           id: 'bottom'
           // toggleAttribute: "restart pause resume none"
         }
@@ -210,6 +210,12 @@ function App() {
             <img className='cloud' src='./cloud.png' alt='cloud' />
 
           </div>
+        <div className='footer'>
+        
+        <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://www.linkedin.com/in/gurjot--sandhu/' target="_blank">
+          <h1 className='footerText'>Created By Gurjot Sandhu</h1>
+          </a>
+        </div>
         </section>
       </div>
     </div>
