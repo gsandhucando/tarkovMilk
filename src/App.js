@@ -54,6 +54,20 @@ function App() {
       // .to(camera.position, { x: -2, z: -1 })
       console.log(ref)
 
+      const tl = gsap .timeline({
+        scrollTrigger: {
+          trigger: '.section-two',
+          start: 'bottom center',
+          endTrigger: '.section-tree',
+          end: 'center bottom',
+          scrub: 1,
+          markers: true,
+          toggleAttribute: "restart pause resume none"
+        }
+      });
+            tl.from(".tweetContainer", {opacity: 0});
+            tl.to(".tweetContainer", {opacity: 1});
+
     }, [])
     return <group ref={ref}>{children}</group>
   }
@@ -130,21 +144,44 @@ function App() {
         <section className="section-three">
           <h1 className='title'>Customer Reviews</h1>
           {/* <p className='description'>Buy One Get One Free</p> */}
-          <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/nikgeneburn' target="_blank">
+          {/* <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/nikgeneburn' target="_blank">
             <img className='tweet' src='./nikitaTweet.png' alt='tweet' />
-          </a>
-          <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/LVNDMARK_tv' target="_blank">
-            <img className='tweet' src='./tonysTweet.png' alt='tweet'>
-            </img>
-          </a>
-          <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/GloriousE1' target="_blank">
-            <img className='tweet' src='./gloriousE.png' alt='tweet'>
-            </img>
-          </a>
-          <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/RealTigz' target="_blank">
-            <img className='tweet' src='./tigzTweet.png' alt='tweet'>
-            </img>
-          </a>
+          </a> */}
+          <div className='tweetContainer'>
+
+            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/LVNDMARK_tv' target="_blank">
+              <img className='tweet' src='./tonysTweet.png' alt='tweet'>
+              </img>
+            </a>
+          </div>
+          <div className='tweetContainer'>
+
+            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/GloriousE1' target="_blank">
+              <img className='tweet' src='./gloriousE.png' alt='tweet'>
+              </img>
+            </a>
+          </div>
+          <div className='tweetContainer'>
+
+            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/RealTigz' target="_blank">
+              <img className='tweet' src='./tigzTweet.png' alt='tweet'>
+              </img>
+            </a>
+          </div>
+          <div className='tweetContainer'>
+
+            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/Pestily' target="_blank">
+              <img className='tweet' src='./pestTweet.png' alt='tweet'>
+              </img>
+            </a>
+          </div>
+          <div className='tweetContainer'>
+
+            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/WillerZ4' target="_blank">
+              <img className='tweet' src='./willerZTweet.png' alt='tweet'>
+              </img>
+            </a>
+          </div>
         </section>
         <section className="section-four">
           <div className='box' />
