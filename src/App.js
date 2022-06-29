@@ -2,10 +2,15 @@ import * as THREE from 'three';
 import React, { Suspense, useRef, useLayoutEffect, useState, useEffect } from "react"
 import { Html, useProgress, Loader, PositionalAudio } from "@react-three/drei"
 import { Canvas, useThree, useLoader } from '@react-three/fiber'
-import { gsap, Power3 } from 'gsap'
-import Model from './TarkovMilk'
+import { gsap, Power4 } from 'gsap'
+// import Model from './TarkovMilk'
+import Model from './Monoko'
 import GoldStar from './GoldStar'
 import './App.css';
+
+//creits yaloken https://sketchfab.com/3d-models/sgushenka-de849052c70f458c9c1c4d65582330c8
+// Runyz https://sketchfab.com/3d-models/cao-sao-vang-golden-star-aromatic-balm-302afdd990304e9cb3d69a8205118f42
+// Vecteezy.com
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faVolumeHigh, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
@@ -46,11 +51,12 @@ function App() {
             endTrigger: '.section-five',
             end: 'bottom bottom',
             scrub: 1,
+            // ease: Power4.inOut
             // markers: true
           }
         })
         .to(ref.current.children[0].rotation, { x: 6.25 }, 'simultaneously')
-        // .to(ref.current.rotation, { y: 4.79 })
+        // .to(ref.current.rotation, { z: 6.25 })
         .to(camera.position, { z: 100 })
         .to(camera.position, { z: 0 })
       console.log(ref)
@@ -58,22 +64,23 @@ function App() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.section-two',
-          start: 'bottom center',
-          endTrigger: '.section-three',
-          end: 'center bottom',
+          start: 'center center',
+          endTrigger: '.section-five',
+          end: 'top top',
           scrub: 1,
           // markers: true,
           toggleAttribute: "restart pause resume none",
           id: 'tweets'
         }
       });
-      tl.from(".tweetContainer", { opacity: 0 });
-      tl.to(".tweetContainer", { opacity: 1 });
+      tl.from(".tweetContainer", { xPercent: -1000 });
+      tl.to(".tweetContainer", { xPercent: 0 });
       const tl2 = gsap.timeline({
         scrollTrigger: {
           trigger: '.section-five',
           // start: 'top top',
-          start: '180px 90%',
+          // start: '180px 90%',
+          start: '300px 90%',
           // endTrigger: '.section-five',
           end: 'center center',
           // end: '90%',
@@ -113,7 +120,7 @@ function App() {
           <div className='navRightContainer'>
             <ul className='navUl'>
               <li className='navLi'>CONTACT</li>
-              <li className='navLi' style={{ marginLeft: 10 }}>ABOUT</li>
+              <li className='navLi' style={{ marginLeft: 10 }}>CREDIT</li>
               {play ?
                 <li onClick={() => PlayAudio()} className='navLi' style={{ marginLeft: 10, dropShadow: '0px 0px 6px #000000' }}>{volume}</li>
                 :
@@ -128,7 +135,8 @@ function App() {
             {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
             {/* <Suspense fallback={<Loader />}> */}
             <AnimationWrapper>
-              <Model position={[0, -15, -35]} />
+              {/* <Model position={[0, -15, -35]} /> */}
+              <Model scale={15} position={[0, -12, -75]} />
             </AnimationWrapper>
             <pointLight position={[10, 10, 10]} />
             {/* </Suspense> */}
@@ -136,7 +144,6 @@ function App() {
           <section className="section-one">
             <div className='sectionOneTextContainer'>
               <h1 className='title'>MONOKO</h1>
-              <p className='description'>Rated Number #1 In Russia</p>
             </div>
           </section>
           <section className="section-two" >
@@ -199,6 +206,7 @@ function App() {
               <img className='pixel' src='./nikitaPix.png' alt='pixel image' />
               <img className='cloud' src='./cloud.png' alt='cloud' />
             </div>
+            <h1 className='title'>Rated Number #1 In Russia</h1>
             <div className='footer'>
               <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://www.linkedin.com/in/gurjot--sandhu/' target="_blank">
                 <h1 className='footerText'>Created By Gurjot Sandhu</h1>
