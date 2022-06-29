@@ -1,25 +1,37 @@
 import * as THREE from 'three';
-import React, { Suspense, useRef, useLayoutEffect } from "react"
-import { Html, useProgress, } from "@react-three/drei"
-import { Canvas, useThree } from '@react-three/fiber'
+import React, { Suspense, useRef, useLayoutEffect, useState, useEffect } from "react"
+import { Html, useProgress, Loader, PositionalAudio } from "@react-three/drei"
+import { Canvas, useThree, useLoader } from '@react-three/fiber'
 import { gsap, Power3 } from 'gsap'
 import Model from './TarkovMilk'
 import GoldStar from './GoldStar'
 import './App.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faVolumeHigh, faVolumeOff } from '@fortawesome/free-solid-svg-icons'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-
-function Loader() {
-  const { progress } = useProgress()
-  return <Html center>{progress} % loaded</Html>
-}
-
+const volume = <FontAwesomeIcon className='icon' icon={faVolumeHigh} />
+const noVolume = <FontAwesomeIcon className='icon' icon={faVolumeOff} />
 
 function App() {
 
+  const [play, setPlay] = useState(false)
+  const audioRef = useRef()
+
+  const PlayAudio = () => {
+    // setPlay(!play)
+    setPlay(prevPlay => !prevPlay);
+    audioRef.current.play()
+    audioRef.current.setVolume(.03)
+    if (!play) {
+      audioRef.current.play()
+    } else {
+      audioRef.current.pause()
+    }
+  }
   function AnimationWrapper({ children }) {
     const ref = useRef()
     const { camera } = useThree()
@@ -38,20 +50,9 @@ function App() {
           }
         })
         .to(ref.current.children[0].rotation, { x: 6.25 }, 'simultaneously')
-      // .to(ref.current.rotation, { y: 4.79 })
-      .to(camera.position, { z: 1500 })
-      // .to(ref.current.rotation, { z: 1.6 })
-      // .to(ref.current.rotation, { z: 0.02, y: 3.1 }, 'simultaneously')
-      // .to(camera.position, { x: 0.16 }, 'simultaneously')
-      // .to(ref.current.rotation, { y: -1 })
-      // .to(camera.position, { x: 14, y: 0 }, 'simultaneously')
-
-
-      // .to(ref.current.rotation, { y: 0 }, 'simultaneously')
-      // .to(camera.position, { x: -10, z: -5 }, 'simultaneously')
-
-      // .to(ref.current.rotation, { y: .5 }, 'simultaneously')
-      // .to(camera.position, { x: -2, z: -1 })
+        // .to(ref.current.rotation, { y: 4.79 })
+        .to(camera.position, { z: 100 })
+        .to(camera.position, { z: 0 })
       console.log(ref)
 
       const tl = gsap.timeline({
@@ -91,8 +92,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      {/* <header className="App-header">
+    <>
+      <div className="App">
+        {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -106,119 +108,108 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <div className='nav'>
-        <img className='logo' src='logo.png' />
-        <div className='navRightContainer'>
-          <ul className='navUl'>
-            <li className='navLi'>CONTACT</li>
-            <li className='navLi' style={{ marginLeft: 10 }}>ABOUT</li>
-          </ul>
+        <div className='nav'>
+          <img className='logo' src='logo.png' />
+          <div className='navRightContainer'>
+            <ul className='navUl'>
+              <li className='navLi'>CONTACT</li>
+              <li className='navLi' style={{ marginLeft: 10 }}>ABOUT</li>
+              {play ?
+                <li onClick={() => PlayAudio()} className='navLi' style={{ marginLeft: 10, dropShadow: '0px 0px 6px #000000' }}>{volume}</li>
+                :
+                <li onClick={() =>PlayAudio()} className='navLi' style={{ marginLeft: 10 }}>{noVolume}</li>
+              }
+            </ul>
+          </div>
         </div>
-      </div>
-      <div className='secondSection' style={{ position: 'relative' }}>
-        {/* orthographic zoom: 20,  */}
-        <Canvas className='model' style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
-          {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
-          <Suspense fallback={<Loader />}>
+        <div className='secondSection' style={{ position: 'relative' }}>
+          {/* orthographic zoom: 20,  */}
+          <Canvas className='model' style={{ width: '100vw', height: '100vh', zIndex: 50, position: 'fixed' }} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
+            {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
+            {/* <Suspense fallback={<Loader />}> */}
             <AnimationWrapper>
               <Model position={[0, -15, -35]} />
-              {/* <GoldStar position={[0,0,-30]} rotation={[-30, 0 , 0]}/> */}
             </AnimationWrapper>
-            {/* <spotLight intensity={.3} position={[0, 0, 30]} angle={0.15} penumbra={1} decay={2} castShadow />
-            <spotLight intensity={.3} position={[0, 0, 30]} angle={0.45} penumbra={1} decay={2} castShadow />
-            <spotLight intensity={.3} position={[0, 0, 30]} angle={0.5} penumbra={1} decay={2} castShadow /> */}
-            {/* <Environment preset="city" background /> */}
             <pointLight position={[10, 10, 10]} />
-          </Suspense>
-        </Canvas>
-        <section className="section-one">
-          <div className='sectionOneTextContainer'>
-            <h1 className='title'>MONOKO</h1>
-            <p className='description'>Rated Number #1 In Russia</p>
-          </div>
-        </section>
-        <section className="section-two" >
-          <h1 className='title' style={{ color: 'gold' }}>Special offer</h1>
-          <p className='description' style={{ color: 'gold', fontFamily: "RedOctober" }}>Buy One Get One Free</p>
-          <Canvas className='model' style={{ width: '100vw', height: '100vh', zIndex: 49 }} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
-            {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
-            <Suspense fallback={<Loader />}>
-              {/* <AnimationWrapper> */}
-              {/* <Model position={[0,-15,-35]} /> */}
-
+            {/* </Suspense> */}
+          </Canvas>
+          <section className="section-one">
+            <div className='sectionOneTextContainer'>
+              <h1 className='title'>MONOKO</h1>
+              <p className='description'>Rated Number #1 In Russia</p>
+            </div>
+          </section>
+          <section className="section-two" >
+            <h1 className='title' style={{ color: 'gold' }}>Special offer</h1>
+            <p className='description' style={{ color: 'gold', fontFamily: "RedOctober" }}>Buy One Get One Free</p>
+            <Canvas className='model' style={{ width: '100vw', height: '100vh', zIndex: 49 }} camera={{ fov: 75, position: [0, 0, 0] }} pixelRatio={window.devicePixelRatio} dpr={[1, 2]}>
+              {/* <fog attach="fog" args={['purple', 1, 155]} /> */}
+              {/* <Suspense fallback={<Loader />}> */}
               <GoldStar position={[-15, 10, -30]} rotation={[-30.5, 4, 0]} />
               <GoldStar position={[20, 0, -30]} rotation={[-10, 9.4, 0]} />
               <GoldStar position={[0, 0, -30]} rotation={[-30, 9, 0]} />
-              {/* </AnimationWrapper> */}
-              {/* <spotLight intensity={.3} position={[0, 0, 30]} angle={0.15} penumbra={1} decay={2} castShadow />
-            <spotLight intensity={.3} position={[0, 0, 30]} angle={0.45} penumbra={1} decay={2} castShadow />
-            <spotLight intensity={.3} position={[0, 0, 30]} angle={0.5} penumbra={1} decay={2} castShadow /> */}
-              {/* <Environment preset="city" background /> */}
               <pointLight position={[10, 10, 10]} />
-            </Suspense>
-          </Canvas>
+              {/* </Suspense> */}
+              <PositionalAudio
+              ref={audioRef}
+                url="/russianAnthem.mp3"
+                distance={1}
+                loop
+              />
+            </Canvas>
 
-        </section>
-        <section className="section-three">
-          <h1 className='title'>Customer Reviews</h1>
-          {/* <p className='description'>Buy One Get One Free</p> */}
-          {/* <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/nikgeneburn' target="_blank">
-            <img className='tweet' src='./nikitaTweet.png' alt='tweet' />
-          </a> */}
-          <div className='tweetContainer'>
-
-            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/LVNDMARK_tv' target="_blank">
-              <img className='tweet' src='./tonysTweet.png' alt='tweet'>
-              </img>
-            </a>
-          </div>
-          <div className='tweetContainer'>
-
-            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/GloriousE1' target="_blank">
-              <img className='tweet' src='./gloriousE.png' alt='tweet'>
-              </img>
-            </a>
-          </div>
-          <div className='tweetContainer'>
-
-            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/RealTigz' target="_blank">
-              <img className='tweet' src='./tigzTweet.png' alt='tweet'>
-              </img>
-            </a>
-          </div>
-          <div className='tweetContainer'>
-
-            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/Pestily' target="_blank">
-              <img className='tweet' src='./pestTweet.png' alt='tweet'>
-              </img>
-            </a>
-          </div>
-          <div className='tweetContainer'>
-
-            <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/WillerZ4' target="_blank">
-              <img className='tweet' src='./willerZTweet.png' alt='tweet'>
-              </img>
-            </a>
-          </div>
-        </section>
-        <section className="section-four">
-          {/* <div className='box' /> */}
-        </section>
-        <section className="section-five" >
-          <div className='pixelFooterContainer'>
-            <img className='pixel' src='./nikitaPix.png' alt='pixel image' />
-            <img className='cloud' src='./cloud.png' alt='cloud' />
-
-          </div>
-        <div className='footer'>
-        
-        <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://www.linkedin.com/in/gurjot--sandhu/' target="_blank">
-          <h1 className='footerText'>Created By Gurjot Sandhu</h1>
-          </a>
+          </section>
+          <section className="section-three">
+            <h1 className='title'>Customer Reviews</h1>
+            <div className='tweetContainer'>
+              <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/LVNDMARK_tv' target="_blank">
+                <img className='tweet' src='./tonysTweet.png' alt='tweet'>
+                </img>
+              </a>
+            </div>
+            <div className='tweetContainer'>
+              <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/GloriousE1' target="_blank">
+                <img className='tweet' src='./gloriousE.png' alt='tweet'>
+                </img>
+              </a>
+            </div>
+            <div className='tweetContainer'>
+              <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/RealTigz' target="_blank">
+                <img className='tweet' src='./tigzTweet.png' alt='tweet'>
+                </img>
+              </a>
+            </div>
+            <div className='tweetContainer'>
+              <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/Pestily' target="_blank">
+                <img className='tweet' src='./pestTweet.png' alt='tweet'>
+                </img>
+              </a>
+            </div>
+            <div className='tweetContainer'>
+              <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://twitter.com/WillerZ4' target="_blank">
+                <img className='tweet' src='./willerZTweet.png' alt='tweet'>
+                </img>
+              </a>
+            </div>
+          </section>
+          {/* <section className="section-four">
+        </section> */}
+          <section className="section-five" >
+            <div className='pixelFooterContainer'>
+              <img className='pixel' src='./nikitaPix.png' alt='pixel image' />
+              <img className='cloud' src='./cloud.png' alt='cloud' />
+            </div>
+            <div className='footer'>
+              <a style={{ zIndex: 100 }} rel="noopener noreferrer" href='https://www.linkedin.com/in/gurjot--sandhu/' target="_blank">
+                <h1 className='footerText'>Created By Gurjot Sandhu</h1>
+              </a>
+            </div>
+          </section>
         </div>
-        </section>
       </div>
-    </div>
+
+      <Loader className='loader' containerStyles={{ position: 'fixed', }} innerStyles={{ fontFamily: "RedOctober-Fat" }} />
+    </>
   );
 }
 
