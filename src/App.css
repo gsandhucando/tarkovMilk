@@ -229,3 +229,32 @@ a:visited{
     font-size: 5.4rem;
   }
 }
+@media only screen and (max-width: 400px) {
+  .title{
+    font-size: 3.4rem;
+  }
+  .navUl{
+    display: flex;
+  }
+  .logo{
+    margin: 55px 40px;
+  }
+  .tweet{
+    width: 380px;
+  }
+  .pixel{
+    width: 200px;
+  }
+  .cloud{
+    position: absolute;
+    top: 26px;
+    height: 120px;
+    left: 160px;
+  }
+  .footer{
+    justify-content: center;
+  }
+  .footerText{
+    margin: 20px;
+  }
+}
